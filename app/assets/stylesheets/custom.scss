@@ -3,9 +3,6 @@ $highlight: #d2674e;
 $dark: #22292e;
 
 
-
-
-
  body {
    font-family: 'Open Sans', sans-serif;
  }
@@ -114,3 +111,5 @@ $dark: #22292e;
   margin: 0;
   text-align: center;
 }
+
+@import "welcome";
