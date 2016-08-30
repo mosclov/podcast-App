@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830212816) do
+ActiveRecord::Schema.define(version: 20160830213633) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "podcasts", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -26,9 +29,14 @@ ActiveRecord::Schema.define(version: 20160830212816) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "title"
+    t.text     "description"
+    t.string   "itunes"
+    t.string   "stitcher"
+    t.string   "podbay"
   end
 
-  add_index "podcasts", ["email"], name: "index_podcasts_on_email", unique: true
-  add_index "podcasts", ["reset_password_token"], name: "index_podcasts_on_reset_password_token", unique: true
+  add_index "podcasts", ["email"], name: "index_podcasts_on_email", unique: true, using: :btree
+  add_index "podcasts", ["reset_password_token"], name: "index_podcasts_on_reset_password_token", unique: true, using: :btree
 
 end

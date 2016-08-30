@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Podcastapp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-<%= yield %>
+  <head>
+    <title>Podcastfm</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-</body>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <% if notice %>
+    <p class="notice">
+      <%= notice %>
+    </p>
+    <% elsif alert %>
+    <p class="alert">
+      <%= alert %></p>
+      <% end %>
+    <header id="main_header" class="cf">
+      <div class="wrapper_wide">
+        <%= link_to "Podcast.fm", root_path, id:"logo" %>
+        <nav>
+          <ul>
+            <%unless podcast_signed_in? %>
+              <li><a href="#">Explore</a></li>
+              <li><%=link_to "Sign In", new_podcast_session_path%></li>
+              <li><%=link_to "Create a Podcast", new_podcast_registration_path %></li>
+            <% else %>
+             <li><a href="#">Dashboard</a></li>
+             <li><a href="#">Explore</a></li>
+             <li><%=link_to "Sign Out", destroy_podcast_session_path, method: :delete%></li>
+           <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <%= yield %>
+  </body>
 </html>
